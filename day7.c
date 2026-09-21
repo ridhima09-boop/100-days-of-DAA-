@@ -1,18 +1,34 @@
-nums = list(map(int, input("Enter sorted array elements: ").split()))
+#include <stdio.h>
 
-left = 0
-right = len(nums) - 1
+int main() {
+    int arr[100], n;
+    int left, right, mid;
 
-while left < right:
-    mid = left + (right - left) // 2
+    printf("Enter size of array: ");
+    scanf("%d", &n);
 
-    # Make mid even
-    if mid % 2 == 1:
-        mid -= 1
+    printf("Enter sorted array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
 
-    if nums[mid] == nums[mid + 1]:
-        left = mid + 2
-    else:
-        right = mid
+    left = 0;
+    right = n - 1;
 
-print("Single element:", nums[left])
+    while (left < right) {
+        mid = left + (right - left) / 2;
+
+        // Make mid even
+        if (mid % 2 == 1)
+            mid--;
+
+        if (arr[mid] == arr[mid + 1])
+            left = mid + 2;
+        else
+            right = mid;
+    }
+
+    printf("Single element: %d\n", arr[left]);
+
+    return 0;
+}
