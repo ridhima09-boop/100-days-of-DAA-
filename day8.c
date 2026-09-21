@@ -1,38 +1,62 @@
-matrix = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12]
-]
+#include <stdio.h>
 
-result = []
+int main() {
+    int matrix[100][100];
+    int m, n;
+    int top, bottom, left, right;
+    int i;
 
-top = 0
-bottom = len(matrix) - 1
-left = 0
-right = len(matrix[0]) - 1
+    printf("Enter number of rows: ");
+    scanf("%d", &m);
 
-while top <= bottom and left <= right:
+    printf("Enter number of columns: ");
+    scanf("%d", &n);
 
-    # Left to Right
-    for i in range(left, right + 1):
-        result.append(matrix[top][i])
-    top += 1
+    printf("Enter matrix elements:\n");
 
-    # Top to Bottom
-    for i in range(top, bottom + 1):
-        result.append(matrix[i][right])
-    right -= 1
+    for (i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
 
-    # Right to Left
-    if top <= bottom:
-        for i in range(right, left - 1, -1):
-            result.append(matrix[bottom][i])
-        bottom -= 1
+    top = 0;
+    bottom = m - 1;
+    left = 0;
+    right = n - 1;
 
-    # Bottom to Top
-    if left <= right:
-        for i in range(bottom, top - 1, -1):
-            result.append(matrix[i][left])
-        left += 1
+    printf("Spiral order: ");
 
-print("Spiral order:", result)
+    while (top <= bottom && left <= right) {
+
+        // Left to Right
+        for (i = left; i <= right; i++)
+            printf("%d ", matrix[top][i]);
+
+        top++;
+
+        // Top to Bottom
+        for (i = top; i <= bottom; i++)
+            printf("%d ", matrix[i][right]);
+
+        right--;
+
+        // Right to Left
+        if (top <= bottom) {
+            for (i = right; i >= left; i--)
+                printf("%d ", matrix[bottom][i]);
+
+            bottom--;
+        }
+
+        // Bottom to Top
+        if (left <= right) {
+            for (i = bottom; i >= top; i--)
+                printf("%d ", matrix[i][left]);
+
+            left++;
+        }
+    }
+
+    return 0;
+}
