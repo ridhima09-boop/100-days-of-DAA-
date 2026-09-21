@@ -1,23 +1,38 @@
-n = int(input("Enter a number: "))
+#include <stdio.h>
 
-binary = bin(n)[2:]
-print("Binary representation:", binary)
+int main() {
+    int n, temp;
+    int count1 = 0, count0 = 0;
+    int current = 0, max = 0;
 
-count_1 = binary.count('1')
-count_0 = binary.count('0')
+    printf("Enter a number: ");
+    scanf("%d", &n);
 
-# Find maximum consecutive 1s
-max_ones = 0
-current_ones = 0
+    temp = n;
 
-for digit in binary:
-    if digit == '1':
-        current_ones += 1
-        if current_ones > max_ones:
-            max_ones = current_ones
-    else:
-        current_ones = 0
+    if (temp == 0) {
+        count0 = 1;
+    }
 
-print("Number of 1s:", count_1)
-print("Number of 0s:", count_0)
-print("Number of consecutive 1s:", max_ones)
+    while (temp > 0) {
+        if (temp % 2 == 1) {
+            count1++;
+            current++;
+
+            if (current > max)
+                max = current;
+        }
+        else {
+            count0++;
+            current = 0;
+        }
+
+        temp = temp / 2;
+    }
+
+    printf("Number of 1s: %d\n", count1);
+    printf("Number of 0s: %d\n", count0);
+    printf("Consecutive 1s: %d\n", max);
+
+    return 0;
+}
